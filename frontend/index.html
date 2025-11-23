@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Security Analyzer - AI Security Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">QR Security Analyzer</span>
+                        <span class="logo-subtitle">AI Security Platform</span>
+                    </div>
+                </div>
+                <div class="header-status">
+                    <div class="status-badge">
+                        <span class="status-pulse"></span>
+                        <span>Sistem Aktif</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-badge">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>EV Charging Security</span>
+                </div>
+                <h1 class="hero-title">
+                    Yapay Zeka Destekli<br>
+                    <span class="gradient-text">QR Güvenlik Analizi</span>
+                </h1>
+                <p class="hero-description">
+                    Elektrikli araç şarj istasyonlarınızı siber tehditlerden koruyun.
+                    Gerçek zamanlı tehdit tespiti ve analiz.
+                </p>
+            </section>
+
+            <!-- Scanner Section -->
+            <section class="scanner-section">
+                <div class="scanner-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-qrcode"></i>
+                            <h3>QR Kod Analizi</h3>
+                        </div>
+                        <div class="scan-count">
+                            <span class="count-number" id="scan-count">0</span>
+                            <span class="count-label">Toplam Tarama</span>
+                        </div>
+                    </div>
+
+                    <form id="qr-form">
+                        <div class="input-container">
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-link input-icon"></i>
+                                <input type="text" id="qr-input" placeholder="QR kod URL'sini buraya yapıştırın..."
+                                    required autocomplete="off">
+                                <button type="submit" class="scan-btn" id="analyze-btn">
+                                    <span class="btn-text">
+                                        <i class="fa-solid fa-magnifying-glass"></i> Analiz Et
+                                    </span>
+                                    <span class="btn-loading">
+                                        <i class="fa-solid fa-spinner fa-spin"></i> Analiz ediliyor...
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="input-hint">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                <span>Örnek: https://eonus.com/charge/abc123 veya herhangi bir QR kod içeriği</span>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Results Container -->
+                    <div id="result-container"></div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h4>AI Destekli</h4>
+                    <p>Makine öğrenmesi ile tehdit tespiti</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h4>Gerçek Zamanlı</h4>
+                    <p>Anlık analiz ve sonuç</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-shield-check"></i>
+                    </div>
+                    <h4>%99.9 Güvenilir</h4>
+                    <p>Endüstri lideri doğruluk oranı</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2025 QR Security Analyzer. Tüm hakları saklıdır.</p>
+                </div>
+                <div class="footer-right">
+                    <a href="#" class="footer-link">Gizlilik Politikası</a>
+                    <a href="#" class="footer-link">Kullanım Koşulları</a>
+                    <a href="#" class="footer-link">İletişim</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

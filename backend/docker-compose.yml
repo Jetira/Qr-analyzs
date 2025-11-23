@@ -1,0 +1,91 @@
+# QR Security Service - Docker Compose Configuration
+# Complete stack: PostgreSQL database + FastAPI backend
+
+version: '3.8'
+
+services:
+  # ==========================================================================
+  # PostgreSQL Database
+  # ==========================================================================
+  db:
+    image: postgres:15-alpine
+    container_name: qr_security_db
+    restart: unless-stopped
+    
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: qr_security
+    
+    volumes:
+      # Persist database data
+      - postgres_data:/var/lib/postgresql/data
+    
+    ports:
+      # Expose for development (remove in production)
+      - "5432:5432"
+    
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    
+    networks:
+      - qr_security_network
+
+  # ==========================================================================
+  # FastAPI Backend
+  # ==========================================================================
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    container_name: qr_security_api
+    restart: unless-stopped
+    
+    depends_on:
+      db:
+        condition: service_healthy
+    
+    environment:
+      # Database connection
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@db:5432/qr_security
+      
+      # Security configuration
+      # IMPORTANT: Replace with your actual official domains in production
+      OFFICIAL_DOMAINS: official-domain.com,charge.official-domain.com,app.official-domain.com
+      
+      # Application settings
+      APP_NAME: QR Security Service
+      LOG_LEVEL: INFO
+      
+      # CORS configuration
+      # IMPORTANT: Replace "*" with specific origins in production
+      CORS_ORIGINS: "*"
+    
+    ports:
+      - "8000:8000"
+    
+    networks:
+      - qr_security_network
+    
+    # Optional: Mount code for development hot-reload
+    # Uncomment for development mode
+    # volumes:
+    #   - ./app:/app/app
+
+# ==============================================================================
+# Networks
+# ==============================================================================
+networks:
+  qr_security_network:
+    driver: bridge
+
+# ==============================================================================
+# Volumes
+# ==============================================================================
+volumes:
+  postgres_data:
+    driver: local

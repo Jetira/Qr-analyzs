@@ -1,0 +1,46 @@
+# Core FastAPI dependencies
+fastapi
+uvicorn[standard]
+
+# Database
+sqlalchemy[asyncio]
+asyncpg
+aiosqlite  # For SQLite async support
+
+# Pydantic and settings
+pydantic
+pydantic-settings
+
+# Environment variables
+python-dotenv
+
+# HTTP client for URL inspection
+httpx
+
+# HTML parsing for content analysis
+beautifulsoup4
+lxml
+
+# QR code decoding
+pyzbar
+Pillow
+
+# File upload support
+python-multipart
+
+# Security
+pyjwt
+python-jose[cryptography]
+passlib[bcrypt]
+
+# Utilities
+rapidfuzz
+
+# Machine Learning
+scikit-learn
+joblib
+numpy
+
+# Database migrations (optional)
+alembic
+

@@ -1,0 +1,20 @@
+# QR Security Service - Python Dependencies (Minimal SQLite Version)
+
+# ============================================================================
+# Web Framework
+# ============================================================================
+fastapi==0.109.0
+uvicorn==0.27.0  # ASGI server (without [standard] extras to avoid Rust)
+
+# ============================================================================
+# Database
+# ============================================================================
+sqlalchemy==2.0.25  # ORM with SQLite support
+aiosqlite==0.19.0  # Async SQLite driver
+
+# ============================================================================
+# Configuration & Validation
+# ============================================================================
+pydantic==2.5.3  # Data validation
+pydantic-settings==2.1.0  # Environment-based settings
+python-dotenv==1.0.0  # .env file support

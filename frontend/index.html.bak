@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Threat Analyzer - Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .safe {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .suspicious {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+        }
+
+        .malicious {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .details {
+            margin-top: 10px;
+            font-size: 14px;
+
+            <div id="result"><div id="verdictBadge" class="badge"></div><h3 id="verdictTitle"></h3><div class="details"><div class="detail-item"><strong>Skor:</strong><span id="score"></span>/100</div><div class="detail-item"><strong>Host:</strong><span id="host"></span></div><div class="detail-item"><strong>Tespitler:</strong></div><ul id="reasons"></ul></div></div></div><script>async function analyzeQR() {
+                const qrData=document.getElementById('qrData').value;
+                const resultDiv=document.getElementById('result');
+                const btn=document.querySelector('button');
+
+                if ( !qrData) {
+                    alert('Lütfen bir URL girin');
+                    return;
+                }
+
+                btn.disabled=true;
+                btn.textContent='Analiz ediliyor...';
+                resultDiv.style.display='none';
+
+                try {
+                    const response=await fetch('http://localhost:8000/api/analyze-qr', {
+
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+
+                        ,
+                        body: JSON.stringify({
+                            qr_data: qrData,
+                            station_id: "550e8400-e29b-41d4-a716-446655440000",
+                            app_version: "1.0.0",
+                            platform: "web-test"
+                        })
+                });
+
+            const data=await response.json();
+
+            // Update UI
+            resultDiv.className=data.verdict;
+            resultDiv.style.display='block';
+
+            const verdictText= {
+                'safe': 'GÜVENLİ',
+                    'suspicious': 'ŞÜPHELİ',
+                    'malicious': 'TEHLİKELİ'
+            }
+
+            ;
+
+            document.getElementById('verdictBadge').textContent=verdictText[data.verdict];
+
+            document.getElementById('verdictTitle').textContent=`Bu QR kod $ {
+                verdictText[data.verdict].toLowerCase()
+            }
+
+            görünüyor.`;
+            document.getElementById('score').textContent=data.score;
+            document.getElementById('host').textContent=data.host || '-';
+
+            const reasonsList=document.getElementById('reasons');
+            reasonsList.innerHTML='';
+
+            data.reasons.forEach(reason=> {
+                    const li=document.createElement('li');
+                    li.textContent=reason;
+                    reasonsList.appendChild(li);
+                });
+
+        }
+
+        catch (error) {
+            alert('Hata oluştu: ' + error.message);
+            console.error(error);
+        }
+
+        finally {
+            btn.disabled=false;
+            btn.textContent='Analiz Et';
+        }
+        }
+
+        </script></body></html>
